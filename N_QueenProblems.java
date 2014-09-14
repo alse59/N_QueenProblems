@@ -13,30 +13,29 @@ public class N_QueenProblems {
 	private static boolean[] downwd = new boolean[15];
 	public static boolean search(int i) {
 		for (int k = 0; k < N; k++) {
-			System.out.println(i);
+			// System.out.println(k);
+			// System.out.println(upwd[11]);
 			if (col[k] == FREE && upwd[i+k] == FREE && downwd[7+i-k] == FREE) {
 				//クイーンを配置する
 				pos[i] = k;
-				System.out.println("pos=" + pos[i]);
 				col[k] = NOT_FREE;
 				upwd[i+k] = NOT_FREE;
 				downwd[7+i-k] = NOT_FREE;
 				if (i == 7) {
 					return SUCCESS;
 				} else {
-					if (search(i+1)) {
+					if (search(1+i)) {
 						return SUCCESS;
 					} else {
 						// クイーンを取り除く
 						pos[i] = 0;
 						col[k] = FREE;
-						upwd[i+k-1] = FREE;
+						upwd[i+k] = FREE;
 						downwd[7+i-k] = FREE;
 					}
 				}
 			}
 		}
-
 		//クイーンが配置できる列が見つからなかった
 		return FAILURE;
 	}
@@ -46,6 +45,8 @@ public class N_QueenProblems {
 		}
 		for (int i = 0;i < 8;i++) {
 			col[i] = FREE;
+		}
+		for (int i = 0;i < 15;i++) {
 			upwd[i] = FREE;
 			downwd[i] = FREE;
 		}
